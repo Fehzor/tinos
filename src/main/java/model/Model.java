@@ -5,10 +5,19 @@
  */
 package model;
 
+import java.util.ArrayList;
+import model.fish.Fish;
+
 /**
  *
  * @author FF6EB
  */
 public class Model {
+    public ArrayList<Fish> stock;
     
+    public void act(){
+        for(Fish fish : stock){
+            fish.swim();
+        }
+    }
 }

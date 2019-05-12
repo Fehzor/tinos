@@ -6,6 +6,7 @@
 package bot;
 
 import static bot.Launcher.client;
+import data.UserData;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.EventDispatcher;
@@ -18,6 +19,7 @@ import discord4j.core.object.entity.TextChannel;
 import discord4j.core.object.reaction.ReactionEmoji;
 import discord4j.core.object.util.Snowflake;
 import reactor.core.publisher.Flux;
+import model.Model;
 
 /**
  *
@@ -57,6 +59,13 @@ public class IO extends Thread{
         String userName = mess.getAuthor().get().getUsername();
         
         System.out.println(channelName+"/"+userName+"> "+mess.getContent().get());
+        
+        if(mess.getContent().equals("!cast")){
+            UserData UD = UserData.getUD(mess.getAuthor().get());
+            if(!Model.fishers.contains(UD)){
+                Model.fishers.add(UD);
+            }
+        }
     }
     
     public void send(String message, Snowflake ID){
@@ -64,4 +73,5 @@ public class IO extends Thread{
         
         chan.createMessage(message).subscribe();
     }
+    
 }

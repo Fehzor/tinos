@@ -132,4 +132,41 @@ public class RadialPoint {
         return true;
     }
     
+    public boolean near(RadialPoint other){
+        //Other dimension = no bueno, never a match
+        if(freq != other.freq){
+            return false;
+        }
+        
+        //Underwater vs surface vs air, does not mix
+        if(Math.signum(other.upAngle) != Math.signum(this.upAngle)){
+            return false;
+        }
+        
+        //How close is it though???
+        long upOff = Math.abs(other.upAngle - this.upAngle);
+        long distOff = Math.abs(other.distance - this.distance);
+        long angOff = Math.abs(other.angle - this.angle);
+        
+        if(upOff > 20){
+            return false;
+        }
+        
+        if(distOff > 2){
+            return false;
+        }
+        
+        if(angOff > 20){
+            return false;
+        }
+        
+        long total = upOff + distOff*10 + angOff;
+        
+        if(total > 45){
+            return false;
+        }
+        
+        return true;
+    }
+    
 }

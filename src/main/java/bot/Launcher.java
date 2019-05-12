@@ -13,6 +13,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.MessageChannel;
 import discord4j.core.object.util.Snowflake;
+import model.Model;
 
 /**
  *
@@ -27,11 +28,8 @@ public class Launcher {
             return;
         }
         
-        //IO io = new IO(args[0]);
+        IO io = new IO(args[0]);
         
-        Field<String> test = new Field<String>("Hello World", "cats", 42);
-        int len = (int)test.invoke("length");
-        
-        System.out.println(test+" is this long: "+len);
+        Model M = new Model(io);
     }
 }

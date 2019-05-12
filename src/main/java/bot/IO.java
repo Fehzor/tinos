@@ -24,7 +24,7 @@ import reactor.core.publisher.Flux;
  * @author FF6EB
  */
 public class IO extends Thread{
-    DiscordClient client;
+    public DiscordClient client;
     
     public IO(String arg){
         client = new DiscordClientBuilder(arg).build();
@@ -45,7 +45,7 @@ public class IO extends Thread{
     }
     
     private void init(ReadyEvent ready){
-        System.out.println("INITIALIZING BOT");
+        System.out.println("INITIALIZING IO");
     }
     
     private void listen(Message mess){

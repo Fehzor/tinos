@@ -5,17 +5,18 @@
  */
 package bot;
 
+import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
 
 /**
  *
  * @author FF6EB
  */
-public class GameChannel {
+public class MainChannel {
     Snowflake flake;
     IO io;
     
-    public GameChannel(IO io, long ID){
+    public MainChannel(IO io, long ID){
         this.flake = Snowflake.of(ID);
         this.io = io;
     }
@@ -24,5 +25,7 @@ public class GameChannel {
         io.send(message, flake);
     }
     
-    
+    public void receive(User u, String message){
+        
+    }
 }

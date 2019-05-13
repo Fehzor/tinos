@@ -11,14 +11,14 @@ package data;
  */
 public class NumberField extends Field{
     
-    public NumberField(long l, Object... keys){
+    public NumberField(long l, String... keys){
         super(l, keys);
         if(this.data == null){
             this.writeData(l);
         }
     }
     
-    public NumberField(Object... keys){
+    public NumberField(String... keys){
         super(keys);
         if(this.data == null){
             this.writeData(0l);

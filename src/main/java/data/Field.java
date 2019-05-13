@@ -28,11 +28,11 @@ public class Field <Type>{
     
     private static HashMap<String,Field> fields = new HashMap<>();
     
-    public Field(Object... key){
-        for(Object k : key){
-            signature += key+"_";
+    public Field(String... key){
+        for(String k : key){
+            signature += k+"_";
         }
-        signature.trim();
+        signature = signature.substring(0,signature.length()-1);
         
         if(fields.containsKey(key)){
             System.out.println("\nWARNING! FIELD ALREADY EXISTS IN DATA- "+signature+"\n");
@@ -53,10 +53,11 @@ public class Field <Type>{
         this.write();
     }
     
-    public Field(Type init, Object... key){
-        for(Object k : key){
-            signature += key.toString();
+    public Field(Type init, String... key){
+        for(String k : key){
+            signature += k+"_";
         }
+        signature = signature.substring(0,signature.length()-1);
         
         if(fields.containsKey(key)){
             System.out.println("\nWARNING! FIELD ALREADY EXISTS IN DATA- "+signature+"\n");

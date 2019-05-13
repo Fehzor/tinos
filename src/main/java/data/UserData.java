@@ -47,19 +47,19 @@ public class UserData {
     private UserData(User user){
         this.snow = user.getId();
         
-        red = new NumberField(this,"red");
-        green = new NumberField(this,"green");
-        blue = new NumberField(this,"blue");
+        red = new NumberField(this+"","red");
+        green = new NumberField(this+"","green");
+        blue = new NumberField(this+"","blue");
         
-        length = new NumberField(this,"length_level");
-        radar = new NumberField(this,"radar_level");
+        length = new NumberField(this+"","length_level");
+        radar = new NumberField(this+"","radar_level");
         
-        distance = new NumberField(this,"cast_distance");
-        frequency = new NumberField(this,"cast_frequency");
-        angle = new NumberField(this,"cast_angle");
-        upAngle = new NumberField(this,"cast_upangle");
+        distance = new NumberField(this+"","cast_distance");
+        frequency = new NumberField(this+"","cast_frequency");
+        angle = new NumberField(this+"","cast_angle");
+        upAngle = new NumberField(this+"","cast_upangle");
         
-        fish = new InventoryField(this,"fish");
+        fish = new InventoryField(this+"","fish");
     }
     
     public NumberField red;

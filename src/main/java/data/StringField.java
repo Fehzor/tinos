@@ -11,11 +11,7 @@ package data;
  */
 public class StringField extends Field{
     
-    public StringField(String s, Object... keys){
-        super(s, keys);
-    }
-    
-    public StringField(Object... keys){
+    public StringField(String... keys){
         super("", keys);
     }
     

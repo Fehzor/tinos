@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author FF6EB
  */
 public class InventoryField extends Field{
-    public InventoryField(Object... keys){
+    public InventoryField(String... keys){
         super(keys);
         
         if(this.data == null){

@@ -16,20 +16,20 @@ import java.util.HashMap;
  * @author FF6EB
  */
 public class UserData {
-    private static Field<ArrayList<Long>> IDList = new Field<ArrayList<Long>>("USERDATA","IDLIST",new ArrayList<>());
+    //private static Field<ArrayList<Long>> IDList = new Field<ArrayList<Long>>(new ArrayList<Long>(),"USERDATA","IDLIST");
     private static HashMap<Long,UserData> UserList = new HashMap<>();
     
     public static UserData getUD(User user){
         long ID = user.getId().asLong();
         
         if(!UserList.containsKey(ID)){
-            if(!IDList.getData().contains(ID)){
-                IDList.getData().add(ID);
-            }
+            //if(!IDList.getData().contains(ID)){
+            //    IDList.getData().add(ID);
+            //}
             UserList.put(ID,new UserData(user));
         }
         
-        IDList.write();
+        //IDList.write();
         
         //if(UserList.get(user.getID()).name.equals("Clint Eastwood's Character")){
         //    UserList.get(user.getID()).name = user.getName();

@@ -55,16 +55,22 @@ public class IO extends Thread{
             //If it's a bot, we don't listen to what it tells us.
             return;
         }
-        String channelName = ((TextChannel)mess.getChannel().block()).getName();
-        String userName = mess.getAuthor().get().getUsername();
         
-        System.out.println(channelName+"/"+userName+"> "+mess.getContent().get());
-        
-        if(mess.getContent().equals("!cast")){
-            UserData UD = UserData.getUD(mess.getAuthor().get());
-            if(!Model.fishers.contains(UD)){
-                Model.fishers.add(UD);
+        try{
+            String channelName = ((TextChannel)mess.getChannel().block()).getName();
+            String userName = mess.getAuthor().get().getUsername();
+
+            System.out.println(channelName+"/"+userName+"> "+mess.getContent().get());
+
+            if(mess.getContent().get().equals("!cast")){
+                UserData UD = UserData.getUD(mess.getAuthor().get());
+                if(!Model.fishers.contains(UD)){
+                    Model.fishers.add(UD);
+                }
             }
+        } catch (Exception E){
+            E.printStackTrace();
+            System.err.println("BAD MESSAGE (Probably a picture rofl)");
         }
     }
     

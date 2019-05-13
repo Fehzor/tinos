@@ -169,4 +169,11 @@ public class RadialPoint {
         return true;
     }
     
+    public String toString(){
+        
+        String dist = Long.toHexString(distance);
+        String frequ = Long.toHexString(freq);
+        
+        return "Radial Point: \nAngle: "+angle+"\nUpAngle: "+upAngle+"\nDistance: "+dist+"\nFrequency:"+freq+"\n";
+    }
 }

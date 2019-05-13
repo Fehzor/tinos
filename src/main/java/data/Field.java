@@ -30,8 +30,9 @@ public class Field <Type>{
     
     public Field(Object... key){
         for(Object k : key){
-            signature += key.toString();
+            signature += key+"_";
         }
+        signature.trim();
         
         if(fields.containsKey(key)){
             System.out.println("\nWARNING! FIELD ALREADY EXISTS IN DATA- "+signature+"\n");
@@ -78,11 +79,7 @@ public class Field <Type>{
     }
     
     public Type getData(){
-        if(data.getClass().isPrimitive()){
-            return data;
-        } else {
-            return null;
-        }
+        return data;
     }
     
     public void writeData(Type data){

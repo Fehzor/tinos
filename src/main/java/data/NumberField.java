@@ -13,15 +13,25 @@ public class NumberField extends Field{
     
     public NumberField(long l, Object... keys){
         super(l, keys);
+        if(this.data == null){
+            this.writeData(l);
+        }
     }
     
     public NumberField(Object... keys){
-        super(0l, keys);
+        super(keys);
+        if(this.data == null){
+            this.writeData(0l);
+        }
     }
     
     public long append(long l){
         data = (long)data + (long)l;
         this.writeData(data);
         return (long)data;
+    }
+    
+    public Long getData(){
+        return ((Long)data).longValue();
     }
 }

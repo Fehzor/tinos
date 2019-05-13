@@ -33,7 +33,7 @@ public class Model extends Thread{
     
     public static final long SLEEP_TIMER = 1000 * 10; //10 seconds
     
-    public static final long MAX_FISH = 10;
+    public static final long MAX_FISH = 100;
     
     public Model(IO io){
         stock = new ArrayList<>();
@@ -66,15 +66,19 @@ public class Model extends Thread{
         //Update the fish's whereabouts
         for(long fish : stock){
             Fish.get(names.get(fish)).swim(locations.get(fish));
+            //System.out.println("Updating... "+fish);
+            //System.out.println(locations.get(fish));
         }
         
         for(UserData UD : fishers){
-            long dist = (long)UD.distance.getData();
+            long dist = UD.distance.getData();
             long angle = (long)UD.angle.getData();
             long upAngle = (long)UD.upAngle.getData();
             long freq = (long)UD.frequency.getData();
             
             RadialPoint checkAt = new RadialPoint(dist,angle,upAngle,freq);
+            
+            System.out.println("Checking at...\n"+checkAt);
             
             long getID = this.checkAt(checkAt);
             

@@ -13,7 +13,6 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.MessageChannel;
 import discord4j.core.object.util.Snowflake;
-import model.Model;
 
 /**
  *
@@ -29,7 +28,5 @@ public class Launcher {
         }
         
         IO io = new IO(args[0]);
-        
-        Model M = new Model(io);
     }
 }

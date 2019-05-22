@@ -19,7 +19,6 @@ import discord4j.core.object.entity.TextChannel;
 import discord4j.core.object.reaction.ReactionEmoji;
 import discord4j.core.object.util.Snowflake;
 import reactor.core.publisher.Flux;
-import model.Model;
 
 /**
  *
@@ -62,12 +61,7 @@ public class IO extends Thread{
 
             System.out.println(channelName+"/"+userName+"> "+mess.getContent().get());
 
-            if(mess.getContent().get().equals("!cast")){
-                UserData UD = UserData.getUD(mess.getAuthor().get());
-                if(!Model.fishers.contains(UD)){
-                    Model.fishers.add(UD);
-                }
-            }
+            
         } catch (Exception E){
             E.printStackTrace();
             System.err.println("BAD MESSAGE (Probably a picture rofl)");

@@ -51,30 +51,14 @@ public class UserData {
         green = new NumberField(this+"","green");
         blue = new NumberField(this+"","blue");
         
-        length = new NumberField(this+"","length_level");
-        radar = new NumberField(this+"","radar_level");
-        
-        distance = new NumberField(this+"","cast_distance");
-        frequency = new NumberField(this+"","cast_frequency");
-        angle = new NumberField(this+"","cast_angle");
-        upAngle = new NumberField(this+"","cast_upangle");
-        
-        fish = new InventoryField(this+"","fish");
+        inventory = new InventoryField(this+"","inventory");
     }
     
     public NumberField red;
     public NumberField green;
     public NumberField blue;
     
-    public NumberField length;
-    public NumberField radar;
-    
-    public NumberField distance;
-    public NumberField frequency;
-    public NumberField angle;
-    public NumberField upAngle;
-    
-    public InventoryField fish;
+    public InventoryField inventory;
     
     public String toString(){
         return "ud_"+this.snow.asLong();

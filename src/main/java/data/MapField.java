@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author FF6EB
  */
 public class MapField<Type> extends Field{
-    public MapField(Object... keys){
+    public MapField(String... keys){
         super(keys);
         
         if(this.data == null){

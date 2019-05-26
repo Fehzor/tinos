@@ -36,4 +36,12 @@ public class PlaceCard extends Card implements Serializable{
     public void setB(long[][] board){
         this.boardB = board;
     }
+    
+    public long[][] getBoardA(){
+        return boardA;
+    }
+    
+    public long[][] getBoardB(){
+        return boardB;
+    }
 }

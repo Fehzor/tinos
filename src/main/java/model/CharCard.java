@@ -33,4 +33,12 @@ public class CharCard extends Card implements Serializable{
         this.start = start;
         this.sequence = sequence;
     }
+    
+    public char start(){
+        return start;
+    }
+    
+    public String sequence(){
+        return sequence;
+    }
 }

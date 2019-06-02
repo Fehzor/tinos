@@ -5,7 +5,7 @@
  */
 package data;
 
-import bot.IO;
+import bot.main.IO;
 import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
 import java.util.ArrayList;
@@ -47,18 +47,34 @@ public class UserData {
     private UserData(User user){
         this.snow = user.getId();
         
-        red = new NumberField(this+"","red");
-        green = new NumberField(this+"","green");
-        blue = new NumberField(this+"","blue");
         
-        inventory = new InventoryField(this+"","inventory");
+        places = new InventoryField(this+"","places");
+        people = new InventoryField(this+"","people");
+        squares = new InventoryField(this+"","squares");
+        coins = new InventoryField(this+"","coins");
+        
     }
     
-    public NumberField red;
-    public NumberField green;
-    public NumberField blue;
+    public InventoryField places;
+    public InventoryField people;
+    public InventoryField squares;
+    public InventoryField coins;
     
-    public InventoryField inventory;
+    public String inv(){
+        String header = "**Inventory:**\n\n";
+        
+        String peeps = "**Characters:**\n"+people;
+        
+        String area = "**Locations:**\n"+places;
+        
+        String square = "**Squares:**\n"+squares;
+        
+        String coin = "**Currency:**\n"+coins;
+        
+        String ret = header+area+peeps+square+coin;
+        
+        return ret;
+    }
     
     public String toString(){
         return "ud_"+this.snow.asLong();

@@ -32,4 +32,8 @@ public abstract class Card implements Serializable{
     public String makeToken(){
         return symbol+"_"+name+"_"+owner;
     }
+    
+    public String toString(){
+        return symbol+name;
+    }
 }

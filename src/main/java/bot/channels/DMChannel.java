@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bot;
-
-import data.MapField;
+package bot.channels;
 
 /**
  *
  * @author FF6EB
  */
-public class Settings {
-    public static MapField<Long> channels = new MapField<Long>("SETTINGS","CHANNELS");
+public class DMChannel {
+    
 }

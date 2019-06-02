@@ -9,5 +9,13 @@ package threads;
  *
  * @author FF6EB
  */
-public class MatchMaker {
+public class MatchMaker extends Thread{
+    
+    
+    
+    public MatchMaker(){
+        this.start();
+    }
+    
+    
 }

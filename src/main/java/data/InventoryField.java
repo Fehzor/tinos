@@ -82,4 +82,15 @@ public class InventoryField extends Field{
     public void take(String item){
         take(item, 1);
     }
+    
+    public String toString(){
+        HashMap<String,Long> map = ((HashMap<String,Long>)data);
+        
+        String ret = "";
+        for(String key : map.keySet()){
+            ret += key+" x"+map.get(key)+"\n";
+        }
+        
+        return ret;
+    }
 }

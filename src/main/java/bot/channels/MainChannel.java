@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bot;
+package bot.channels;
 
+import bot.main.IO;
 import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
 

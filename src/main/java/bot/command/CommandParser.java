@@ -13,7 +13,7 @@ import discord4j.core.object.entity.Message;
  * @author FF6EB
  */
 public class CommandParser {
-    public void parseCommand(IO io, Message mess){
+    public static void eval(IO io, Message mess){
         
         String S = mess.getContent().get();
         
@@ -22,8 +22,13 @@ public class CommandParser {
         signature = signature.toLowerCase();
         
         try{
-            String result = Command.get(signature).execute(mess);
-            io.send(result, mess.getChannelId());
+            Command com = Command.get(signature);
+            if(com == null){
+                return;
+            } else {
+                String result = com.execute(mess);
+                io.send(result, mess.getChannelId());
+            }
         } catch (Exception E){
             System.err.println("ERROR IN COMMANDPARSER- "+mess.getContent().get());
         }
@@ -32,5 +37,7 @@ public class CommandParser {
     private static CommandParser CP = new CommandParser();
     private CommandParser(){
         //Instantiate commands here :D
+        new PlsCom();
+        new InvCom();
     }
 }

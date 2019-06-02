@@ -16,15 +16,17 @@ public class Command {
     
     private static HashMap<String, Command> commands = new HashMap<>();
     
-    private String [] ident;
-    private String description;
+    String [] ident;
+    String description;
+    boolean hidden;
     
     public Command(){
         ident = new String[]{};
         description = "";
+        hidden = true;
     }
     
-    public void addCommand(){
+    void addCommand(){
         for(String id : ident){
             commands.put(id, this);
         }

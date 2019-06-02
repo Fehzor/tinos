@@ -5,6 +5,7 @@
  */
 package model;
 
+import static bot.SuperRandom.oRan;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class Square{
         this.A = A;
         this.B = B;
         
-        squares.put(this+"",this);
+        squares.put(this.toString(),this);
     }
     
     public static Square getSquare(long A, long B){
@@ -29,6 +30,13 @@ public class Square{
         } else {
             return new Square(A, B);
         }
+    }
+    
+    public static Square getRandom(){
+        long a = oRan.nextInt(5) - 2;
+        long b = oRan.nextInt(5) - 2;
+        
+        return getSquare(a,b);
     }
     
     private long A;
@@ -49,7 +57,7 @@ public class Square{
     }
     
     public String toString(){
-        return "A: "+A+"\nB: "+B;
+        return "["+A+","+B+"]";
     }
     
     public static String toString(long A, long B){

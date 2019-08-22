@@ -30,6 +30,7 @@ public class CommandParser {
                 io.send(result, mess.getChannelId());
             }
         } catch (Exception E){
+            E.printStackTrace();
             System.err.println("ERROR IN COMMANDPARSER- "+mess.getContent().get());
         }
     }
@@ -38,6 +39,11 @@ public class CommandParser {
     private CommandParser(){
         //Instantiate commands here :D
         new PlsCom();
-        new InvCom();
+        new InfoCom();
+        new SetNameCom();
+        new SetGuildCom();
+        
+        //new SetJob();
+        //new CommunCheck();
     }
 }

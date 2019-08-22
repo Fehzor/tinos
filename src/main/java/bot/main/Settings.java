@@ -13,4 +13,7 @@ import data.MapField;
  */
 public class Settings {
     public static MapField<Long> channels = new MapField<Long>("SETTINGS","CHANNELS");
+    
+    public static long babyDucksRoleID = Long.parseLong(System.getenv("DUCK"));
+    public static long NOTbabyDucksRoleID = Long.parseLong(System.getenv("CHICKEN"));
 }

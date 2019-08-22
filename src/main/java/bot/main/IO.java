@@ -11,6 +11,7 @@ import data.UserData;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.EventDispatcher;
+import discord4j.core.event.domain.guild.MemberJoinEvent;
 import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Channel;
@@ -29,6 +30,13 @@ import reactor.core.publisher.Flux;
 public class IO extends Thread{
     public DiscordClient client;
     
+    private String joinMessage = "Hello and welcome to Tinos Ranchs Discord Channel!\n\n"
+            + ""
+            + "To get started, type setname <name> and setguild <guild> to set your knight name and guild!\n"
+            + "(This must be done in one of the main chat channels and not the DM!)\n\n"
+            + ""
+            + "This will not nickname you, but will help people know your in game name via the info <mention> command!";
+    
     public IO(String arg){
         client = new DiscordClientBuilder(arg).build();
         
@@ -44,6 +52,12 @@ public class IO extends Thread{
                 .map(MessageCreateEvent::getMessage)
                 .subscribe(mess -> listen(mess));
         
+        client.getEventDispatcher()
+                .on(MemberJoinEvent.class)
+                .map(MemberJoinEvent::getMember)
+                .subscribe(u -> send(joinMessage,u));
+                
+        
         client.login().block();
     }
     
@@ -52,6 +66,12 @@ public class IO extends Thread{
     }
     
     private void listen(Message mess){
+        try{
+            addMessage(mess);
+        } catch (Exception E){
+            System.err.println("FAILURE TO ADD MESSAGE!");
+        }
+        
         if(mess.getAuthor().get().isBot()){
             //If it's a bot, we don't listen to what it tells us.
             return;
@@ -68,6 +88,14 @@ public class IO extends Thread{
             E.printStackTrace();
             System.err.println("BAD MESSAGE (Probably a picture rofl)");
         }
+    }
+    
+    public void addMessage(Message mess){
+        UserData UD = UserData.getUD(mess.getAuthor().get());
+        
+        UD.messages.append(1l);
+        String message = mess.getContent().get();
+        UD.letters.append(message.length());
     }
     
     public void send(String message, Snowflake ID){

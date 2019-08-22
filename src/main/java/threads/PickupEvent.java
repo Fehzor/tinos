@@ -9,7 +9,6 @@ import bot.main.IO;
 import data.MapField;
 import data.UserData;
 import discord4j.core.object.entity.User;
-import model.Square;
 
 /**
  *
@@ -20,7 +19,7 @@ public class PickupEvent extends TimeEvent{
     
     private MapField<Long> tickList;
     public PickupEvent(IO io){
-        super(io, TIME);
+        super(io, TIME,"PICKUP");
         tickList = new MapField<Long>("pickup","ticks");
     }
     
@@ -30,26 +29,6 @@ public class PickupEvent extends TimeEvent{
     }
     
     public void execute(UserData UD){
-        long tick = tickList.get(UD.snow.asLong()+"");
-        tickList.append(UD.snow.asLong()+"", 1l);
         
-        if(tick == 0l){
-            UD.squares.give(Square.getRandom().toString(),3);
-            UD.squares.give(Square.getRandom().toString(),3);
-            UD.squares.give(Square.getRandom().toString(),3);
-            
-            io.send("Found squares! You now have-\n"+UD.squares, UD);
-        }
-        
-        if(tick == 1l){
-            UD.squares.give(Square.getRandom().toString(),3);
-            UD.squares.give(Square.getRandom().toString(),3);
-            io.send("Found squares! You now have- \n"+UD.squares, UD);
-        }
-        
-        if(tick == 3l){
-            UD.squares.give(Square.getRandom().toString(),3);
-            io.send("Found squares! You now have- \n"+UD.squares, UD);
-        }
     }
 }

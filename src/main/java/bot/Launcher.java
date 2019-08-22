@@ -15,6 +15,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.MessageChannel;
 import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
+import threads.JobEvent;
 import threads.PickupEvent;
 
 /**
@@ -23,18 +24,23 @@ import threads.PickupEvent;
  */
 public class Launcher {
     
+    public static JobEvent jobs;
+    
     public static DiscordClient client;
     
     public static void main(String [] args){
-        if(args.length != 1){
-            return;
-        }
+        //if(args.length != 1){
+        //    return;
+        //}
+        
+        String argument = System.getenv("BOTCODE");
         
         IO io = new IO(args[0]);
         
-        PickupEvent pickup = new PickupEvent(io);
+        //jobs = new JobEvent(io);
+        //PickupEvent pickup = new PickupEvent(io);
         
-        User fehzor = io.client.getUserById(Snowflake.of(144857966816788482l)).block();
-        pickup.addUser(fehzor);
+        //User fehzor = io.client.getUserById(Snowflake.of(144857966816788482l)).block();
+        //pickup.addUser(fehzor);
     }
 }

@@ -34,4 +34,8 @@ public class NumberField extends Field{
     public Long getData(){
         return ((Long)data).longValue();
     }
+    
+    public void set(long lon){
+        this.data = lon;
+    }
 }

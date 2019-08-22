@@ -6,6 +6,7 @@
 package threads;
 
 import bot.main.IO;
+import data.Field;
 import data.UserData;
 import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
@@ -21,9 +22,14 @@ public class TimeEvent extends Thread{
     private long last;
     public IO io;
     
-    private ArrayList<Long> IDList = new ArrayList<>();
+    private Field<ArrayList<Long>> IDList;
     
-    public TimeEvent(IO io, long timer){
+    public TimeEvent(IO io, long timer, String name){
+        this.IDList = new Field<ArrayList<Long>>("TIMERLIST",name);
+        if(IDList.getData() == null){
+            IDList.writeData(new ArrayList<Long>());
+        }
+        
         this.timer = timer;
         last = System.currentTimeMillis();
         running = true;
@@ -32,16 +38,36 @@ public class TimeEvent extends Thread{
         this.start();
     }
     
+    public ArrayList<UserData> getUsers(){
+        ArrayList<UserData> users = new ArrayList<>();
+        
+        for(Long l : IDList.getData()){
+            users.add(UserData.getUD(io,Snowflake.of(l)));
+        }
+        
+        return users;
+    }
+    
     public void execute(UserData UD){
         //Override this to do stuff to the users!
     }
     
     public void addUser(User U){
-        IDList.add(U.getId().asLong());
+        if(IDList.getData().contains(U.getId().asLong())){
+            return;
+        }
+        ((ArrayList<Long>)IDList.getData()).add(U.getId().asLong());
+        IDList.write();
     }
     
     public void removeUser(User U){
-        IDList.remove(U.getId().asLong());
+        ((ArrayList<Long>)IDList.getData()).remove(U.getId().asLong());
+        IDList.write();
+    }
+    
+    public void removeUser(UserData UD){
+        ((ArrayList<Long>)IDList.getData()).remove(UD.snow.asLong());
+        IDList.write();
     }
     
     public void run(){
@@ -49,7 +75,9 @@ public class TimeEvent extends Thread{
             Thread.yield();
             
             if(System.currentTimeMillis() - last > timer){
-                for(Long ID : IDList){
+                for(int i = IDList.getData().size()-1; i >= 0; --i){
+                    long ID = IDList.getData().get(i);
+                    
                     Snowflake snow = Snowflake.of(ID);
                     User u = io.client.getUserById(snow).block();
                     UserData UD = UserData.getUD(u);

@@ -6,6 +6,7 @@
 package data;
 
 import java.util.HashMap;
+import model.Levels;
 
 /**
  *
@@ -64,6 +65,14 @@ public class InventoryField extends Field{
         return this.has(item,1);
     }
     
+    public boolean hasLevel(String stat, long level){
+        HashMap<String,Long> map = ((HashMap<String,Long>)data);
+        
+        long lev = Levels.getLevel(map.get(stat));
+        
+        return lev >= level;
+    }
+    
     public void take(String item, long amt){
         HashMap<String,Long> map = ((HashMap<String,Long>)data);
         
@@ -92,5 +101,22 @@ public class InventoryField extends Field{
         }
         
         return ret;
+    }
+    
+    public String asLevels(){
+        HashMap<String,Long> map = ((HashMap<String,Long>)data);
+        
+        String ret = "";
+        for(String key : map.keySet()){
+            ret += key+": "+Levels.getLevel(map.get(key))+"\n";
+        }
+        
+        return ret;
+    }
+    
+    public boolean isEmpty(){
+        HashMap<String,Long> map = ((HashMap<String,Long>)data);
+        
+        return map.isEmpty();
     }
 }

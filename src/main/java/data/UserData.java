@@ -10,6 +10,8 @@ import discord4j.core.object.entity.User;
 import discord4j.core.object.util.Snowflake;
 import java.util.ArrayList;
 import java.util.HashMap;
+import model.Jobs.Job;
+import model.Levels;
 
 /**
  *
@@ -43,35 +45,81 @@ public class UserData {
     }
     
     public Snowflake snow;
+    public User user;
     
     private UserData(User user){
         this.snow = user.getId();
+        this.user = user;
         
+        SKName = new StringField(snow.asString(),"SK","Name");
+        if(SKName.empty()){
+            SKName.set("Unspecified");
+        }
         
-        places = new InventoryField(this+"","places");
-        people = new InventoryField(this+"","people");
-        squares = new InventoryField(this+"","squares");
-        coins = new InventoryField(this+"","coins");
+        SKGuild = new StringField(snow.asString(),"SK","Guild");
+        if(SKGuild.empty()){
+            SKGuild.set("Unspecified");
+        }
         
+        messages = new NumberField(snow.asString(),"messages");
+        letters = new NumberField(snow.asString(),"letters");
+        
+        levels = new InventoryField(snow.asString(),"skills");
+        if(levels.isEmpty()){
+            for(int i = 0; i < 7; ++i){
+                levels.give(Levels.getStatName(i),10);
+            }
+        }
+        
+        currentJob = new StringField(snow.asString(), "jobTitle");
+        if(currentJob.empty()){
+            currentJob.set("None");
+        }
+        startJob = new NumberField(snow.asString(), "jobStart");
+        
+        dressing = new NumberField(snow.asString(), "dressing");
     }
     
-    public InventoryField places;
-    public InventoryField people;
-    public InventoryField squares;
-    public InventoryField coins;
+    public StringField SKName;
+    public StringField SKGuild;
+    
+    public NumberField messages;
+    public NumberField letters;
+    public NumberField dressing;
+    
+    public NumberField startJob;
+    public StringField currentJob;
+    
+    public InventoryField levels;
+    public InventoryField artifacts;
     
     public String inv(){
-        String header = "**Inventory:**\n\n";
+        String username = "**Discord Handle: ** "+user.getUsername()+"#"+user.getDiscriminator()+"\n";
+        String name = "**Knight Name: **"+SKName+"\n";
+        String guild = "**Guild: **"+SKGuild+"\n";
         
-        String peeps = "**Characters:**\n"+people;
+        String otherstats = "\n**Statistics**\n```";
+        otherstats += "Messages Sent: "+messages.getData()+"\n";
+        otherstats += "Characters Sent: "+letters.getData()+"\n";
+        if(messages.getData() > 0){
+            otherstats += "Average Characters per Message: "+(letters.getData() / (messages.getData()))+"\n";
+        }
+        otherstats+="```";
         
-        String area = "**Locations:**\n"+places;
+        String skills = "\n**Skills**\n```";
+        skills+=levels.asLevels();
+        skills+="```";
         
-        String square = "**Squares:**\n"+squares;
+        String money = "\n**Ranch Dressing: **"+dressing+" ounces\n";
         
-        String coin = "**Currency:**\n"+coins;
+        String job = "\n**Job: **"+currentJob.toString()+"```";
+        if(Job.isJob(currentJob.toString())){
+            Job jo = Job.getJob(currentJob.toString());
+            job+="\n"+jo.getStats();
+        }
+        job+="```";
         
-        String ret = header+area+peeps+square+coin;
+        String ret = username+name+guild+otherstats+skills+job+money;
         
         return ret;
     }

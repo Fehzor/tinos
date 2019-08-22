@@ -20,4 +20,21 @@ public class StringField extends Field{
         this.writeData(data);
         return (String)data;
     }
+    
+    public boolean empty(){
+        if(data.equals("")){
+            return true;
+        }
+        return false;
+    }
+    
+    public String toString(){
+        return (String)data;
+    }
+    
+    public void set(String set){
+        data = set;
+        this.write();
+        
+    }
 }
